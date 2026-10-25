@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { lieux } from "@/lib/lieux";
@@ -6,7 +7,15 @@ export function generateStaticParams() {
   return lieux.map((l) => ({ slug: l.slug }));
 }
 
-export default async function Repere({ params }: PageProps<"/repere/[slug]">) {
+export default function Page({ params }: PageProps<"/repere/[slug]">) {
+  return (
+    <Suspense fallback={<p className="p-6 text-center text-sm text-foreground/60">Chargement…</p>}>
+      <Repere params={params} />
+    </Suspense>
+  );
+}
+
+async function Repere({ params }: Pick<PageProps<"/repere/[slug]">, "params">) {
   const { slug } = await params;
   const lieu = lieux.find((l) => l.slug === slug);
   if (!lieu) notFound();
