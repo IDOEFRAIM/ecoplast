@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { lieux } from "@/lib/lieux";
+import Proximite from "./Proximite";
 
 export function generateStaticParams() {
   return lieux.map((l) => ({ slug: l.slug }));
@@ -20,11 +21,6 @@ async function Repere({ params }: Pick<PageProps<"/repere/[slug]">, "params">) {
   const lieu = lieux.find((l) => l.slug === slug);
   if (!lieu) notFound();
 
-  const pos = lieu.position;
-  const d = 0.002;
-  const carte = pos
-    ? `https://www.openstreetmap.org/export/embed.html?bbox=${pos.lng - d}%2C${pos.lat - d}%2C${pos.lng + d}%2C${pos.lat + d}&layer=mapnik&marker=${pos.lat}%2C${pos.lng}`
-    : null;
   const autres = lieux.filter((l) => l.slug !== lieu.slug);
 
   return (
@@ -51,23 +47,7 @@ async function Repere({ params }: Pick<PageProps<"/repere/[slug]">, "params">) {
           <p className="mt-6 leading-relaxed">{lieu.direction}</p>
         </div>
 
-        {carte && pos ? (
-          <section className="mt-4 overflow-hidden rounded-2xl bg-white shadow-md">
-            <iframe src={carte} title={`Carte : ${lieu.nom}`} className="h-64 w-full border-0" loading="lazy" />
-            <a
-              href={`https://www.openstreetmap.org/?mlat=${pos.lat}&mlon=${pos.lng}#map=18/${pos.lat}/${pos.lng}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block bg-brand px-4 py-3 text-center font-semibold text-white"
-            >
-              Ouvrir la carte en grand
-            </a>
-          </section>
-        ) : (
-          <p className="mt-4 text-center text-sm text-foreground/60">
-            Position non encore enregistrée pour ce lieu.
-          </p>
-        )}
+        <Proximite nom={lieu.nom} position={lieu.position} points={lieu.points} />
 
         <section className="mt-6">
           <h3 className="font-semibold text-brand">Autres points de repère</h3>
@@ -87,8 +67,8 @@ async function Repere({ params }: Pick<PageProps<"/repere/[slug]">, "params">) {
         </section>
 
         <p className="mt-6 rounded-lg bg-brand-soft px-3 py-2 text-xs text-brand">
-          Démonstration : lieu fictif. Le QR code ne localise pas l&apos;utilisateur, la position
-          est renseignée à l&apos;avance.
+          Démonstration : lieu et points stratégiques fictifs. Le QR code ouvre la page ; la position
+          de la personne vient du GPS du téléphone, avec son accord.
         </p>
       </div>
     </main>

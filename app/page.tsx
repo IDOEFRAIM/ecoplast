@@ -2,12 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 const innovations = [
-  ["♻", "Plastique recyclé", "Valorisation de déchets plastiques collectés dans la fabrication."],
-  ["◐", "Drainage", "Conception visant à faciliter la gestion et l'évacuation de l'eau."],
-  ["⬡", "Système autobloquant", "Forme pensée pour permettre l'emboîtement des pavés entre eux."],
-  ["✦", "Graphismes traditionnels", "Motifs décoratifs inspirés des formes et références culturelles burkinabè."],
-  ["➚", "Orientation physique", "Flèches, symboles directionnels ou repères visibles au sol sur certains pavés."],
-  ["▦", "QR code intégré", "Accès aux informations du produit et démonstration du repérage des lieux."],
+  ["♻", "Plastique recyclé", "Fabriqué à partir de déchets plastiques (sachets, emballages…) collectés et valorisés."],
+  ["⬡", "Système autobloquant", "Des fentes sur les côtés permettent d'emboîter un pavé dans le suivant : pose plus facile et meilleure tenue de l'ensemble."],
+  ["◐", "Drainage par le centre", "Le rond central, rempli de matériaux concassés, est conçu pour capter l'eau de pluie et favoriser son infiltration dans le sol plutôt que son ruissellement."],
+  ["➚", "Orientation Nord / Sud", "Des flèches vers le Nord sur certains pavés, vers le Sud sur d'autres : une personne perdue peut s'orienter directement au sol."],
+  ["✦", "Graphismes traditionnels", "Des motifs sur les contours rappellent les origines et références culturelles burkinabè."],
+  ["▦", "QR code intelligent", "Il présente le produit et ses matériaux, puis situe la personne et les points stratégiques proches (hôpital, police…)."],
 ];
 
 const couleurs = [
@@ -45,6 +45,12 @@ export default function Home() {
             Le pavé intelligent en plastique recyclé est un concept de pavé conçu pour associer
             valorisation des déchets plastiques, aménagement des espaces extérieurs et solutions
             de repérage grâce à des symboles directionnels et à un QR code.
+          </p>
+          <h3 className="mt-5 font-semibold text-brand">Ce qui nous distingue</h3>
+          <p className="mt-1 leading-relaxed text-foreground/80">
+            Des pavés en plastique recyclé existent déjà. Notre apport est de les rendre
+            <strong> autobloquants</strong>, <strong>drainants</strong> et{" "}
+            <strong>communicants</strong> (orientation au sol et QR code) dans un même pavé.
           </p>
           <p className="mt-3 rounded-lg bg-brand-soft px-3 py-2 text-sm text-brand">
             Prototype en cours de développement : les caractéristiques présentées sont celles du
@@ -110,9 +116,9 @@ export default function Home() {
         <section className="mt-8 rounded-2xl bg-brand p-5 text-white">
           <h2 className="text-xl font-semibold">Orientation et repérage par QR code</h2>
           <p className="mt-2 text-sm text-white/85">
-            Le QR code peut afficher le nom d&apos;un lieu, une indication et une direction à
-            suivre. Il ne détecte pas la position de l&apos;utilisateur : le lieu est enregistré
-            à l&apos;avance.
+            En scannant le pavé, la personne voit où elle se trouve et les points stratégiques
+            autour d&apos;elle (hôpital, police…) avec la distance. Sa position vient du GPS de son
+            téléphone, avec son accord ; l&apos;emplacement du pavé est enregistré à l&apos;avance.
           </p>
           <p className="mt-3 text-xs uppercase tracking-wider text-white/60">
             Exemple de démonstration
